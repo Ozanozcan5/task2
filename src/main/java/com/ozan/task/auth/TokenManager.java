@@ -29,10 +29,7 @@ public class TokenManager {
     }
 
     public boolean tokenValidate(String token) {
-        if (getUsernameToken(token) != null && isExpired(token)) {
-            return true;
-        }
-        return false;
+        return getUsernameToken(token) != null && isExpired(token);
     }
 
     public String getUsernameToken(String token) {
@@ -46,6 +43,8 @@ public class TokenManager {
     }
 
     private Claims getClaims(String token) {
-        return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
+        //deprecated
+//        return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
+        return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 }

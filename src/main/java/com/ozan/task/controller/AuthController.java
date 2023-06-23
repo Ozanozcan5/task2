@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("auth")
 public class AuthController {
     @Autowired
     private TokenManager tokenManager;
@@ -19,15 +17,16 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
+//        authenticationManager.authenticate(
+//                new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
 
-            return ResponseEntity.ok(tokenManager.generateToken(loginDto.getUsername()));
-        } catch (Exception e) {
-            throw e;
-        }
+        return ResponseEntity.ok(tokenManager.generateToken(loginDto.getUsername()));
+    }
+
+    @GetMapping("test")
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("test");
     }
 }

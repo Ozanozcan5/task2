@@ -1,8 +1,10 @@
 package com.ozan.task.service;
 
 
+import com.ozan.task.dto.LoginDto;
 import com.ozan.task.model.UserDetail;
 import com.ozan.task.repository.UserRepository;
+import com.ozan.task.response.LoginResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +35,7 @@ import org.springframework.stereotype.Service;
             return userRepo.existsByEmail(email);
         }
 
-    }
+
+
+}
 
